@@ -1,6 +1,15 @@
 package com.example.qr_codescan;
 
 
+import java.net.URI;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,11 +23,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	private final static int SCANNIN_GREQUEST_CODE = 1;
 	/**
-	 * ÏÔÊ¾É¨Ãè½á¹û
+	 * æ˜¾ç¤ºæ‰«æç»“æœ
 	 */
 	private TextView mTextView ;
 	/**
-	 * ÏÔÊ¾É¨ÃèÅÄµÄÍ¼Æ¬
+	 * æ˜¾ç¤ºæ‰«ææ‹çš„å›¾ç‰‡
 	 */
 	private ImageView mImageView;
 	
@@ -31,8 +40,8 @@ public class MainActivity extends Activity {
 		mTextView = (TextView) findViewById(R.id.result); 
 		mImageView = (ImageView) findViewById(R.id.qrcode_bitmap);
 		
-		//µã»÷°´Å¥Ìø×ªµ½¶şÎ¬ÂëÉ¨Ãè½çÃæ£¬ÕâÀïÓÃµÄÊÇstartActivityForResultÌø×ª
-		//É¨ÃèÍêÁËÖ®ºóµ÷µ½¸Ã½çÃæ
+		//ç‚¹å‡»æŒ‰é’®è·³è½¬åˆ°äºŒç»´ç æ‰«æç•Œé¢ï¼Œè¿™é‡Œç”¨çš„æ˜¯startActivityForResultè·³è½¬
+		//æ‰«æå®Œäº†ä¹‹åè°ƒåˆ°è¯¥ç•Œé¢
 		Button mButton = (Button) findViewById(R.id.button1);
 		mButton.setOnClickListener(new OnClickListener() {
 			
@@ -54,9 +63,30 @@ public class MainActivity extends Activity {
 		case SCANNIN_GREQUEST_CODE:
 			if(resultCode == RESULT_OK){
 				Bundle bundle = data.getExtras();
-				//ÏÔÊ¾É¨Ãèµ½µÄÄÚÈİ
+				try{
+					URI url = URI.create("http://www.baidu.com");
+					HttpPost request = new HttpPost(url);
+					// å…ˆå°è£…ä¸€ä¸ª JSON å¯¹è±¡
+					JSONObject param = new JSONObject();
+					param.put("name", "rarnu");
+					param.put("password", "123456");
+					// ç»‘å®šåˆ°è¯·æ±‚ Entry
+					StringEntity se = new StringEntity(param.toString()); 
+					request.setEntity(se);
+					// å‘é€è¯·æ±‚
+					HttpResponse httpResponse = new DefaultHttpClient().execute(request);
+					// å¾—åˆ°åº”ç­”çš„å­—ç¬¦ä¸²ï¼Œè¿™ä¹Ÿæ˜¯ä¸€ä¸ª JSON æ ¼å¼ä¿å­˜çš„æ•°æ®
+					String retSrc = EntityUtils.toString(httpResponse.getEntity());
+					// ç”Ÿæˆ JSON å¯¹è±¡
+					JSONObject result = new JSONObject( retSrc);
+					String token = (String) result.get("token");
+				}catch(Exception e) {
+		            e.printStackTrace();
+				}
+				//æ˜¾ç¤ºæ‰«æåˆ°çš„å†…å®¹
 				mTextView.setText(bundle.getString("result"));
-				//ÏÔÊ¾
+				
+				//æ˜¾ç¤º
 				mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
 			}
 			break;
