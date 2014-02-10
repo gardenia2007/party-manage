@@ -1,0 +1,41 @@
+$def with (d, s)
+
+  <style type="text/css">
+    dd{margin-bottom:10px}
+  </style>
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">$d.name<small>$d.no</small></h4>
+      </div>
+      <div class="modal-body">
+
+        <dl>
+
+          <dt>班号</dt>
+          <dd>$d.classno</dd>
+
+          <dt>联系电话</dt>
+          <dd>$d.phone</dd>
+
+          <dt>电子邮箱</dt>
+          <dd>$d.email</dd>
+
+          <dt>个人介绍</dt>
+          <dd>$d.intro</dd>
+
+        </dl>
+
+      </div>
+      $def disable():
+        $if s == 'pass':
+          disabled='disabled'
+      <div class="modal-footer">
+        <a href="$config.root/teacher/pass/$d.st" $:disable() class="btn btn-primary">选择该学生</a>
+        <a href="$config.root/teacher/fail/$d.st" $:disable() class="btn btn-danger">放弃</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->

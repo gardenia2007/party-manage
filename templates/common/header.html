@@ -1,0 +1,80 @@
+$def with (session, route)
+
+$def if_active(ii='teacher_all'):
+  $if ii == route :
+    active
+$def hello():
+  $if session.role == 'student':
+    $session.name同学，您好！
+  $elif session.role == 'teacher':
+    $session.name老师，您好！
+  $else:
+    $session.name 您好！
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>$config.site_name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Le styles -->
+  <link href="$config.static/css/bootstrap.css" rel="stylesheet">
+  <link href="$config.static/css/todc-bootstrap.css" rel="stylesheet">
+  <link href="$config.static/css/sticky-footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  </style>
+     
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+  <script src="$config.static/js/jquery.min.js"></script>
+  <script src="$config.static/js/bootstrap.min.js"></script>
+
+</head>
+         
+<body>
+
+<div id="wrap">
+
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">$config.site_name</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+        <li class="$if_active('teacher_all')"><a href="$config.root/student/teacher/all">导师库</a></li>
+      $if session.role == 'student':
+        <li class="$if_active('teacher_my')"><a href="$config.root/student/teacher/my">我的导师</a></li>
+        <li class="$if_active('student_info')"><a href="$config.root/student/info">个人信息</a></li>
+      $if session.role == 'teacher':
+        <li class="$if_active('student_my')"><a href="$config.root/teacher/student/my">我的学生</a></li>
+        <li class="$if_active('teacher_info')"><a href="$config.root/teacher/info">个人信息</a></li>
+      $if session.is_admin:
+        <li class="$if_active('info-student')"><a href="$config.root/admin/info/student">学生统计</a></li>
+        <li class="$if_active('info-teacher')"><a href="$config.root/admin/info/teacher">导师统计</a></li>
+        <li class="$if_active('manage-teacher')"><a href="$config.root/admin/manage/teacher">导师管理</a></li>
+        <li class="$if_active('admin')"><a href="$config.root/admin">系统管理</a></li>
+      <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
+    </ul>
+    <p class="navbar-text pull-right"> $hello() <a href="$config.root/logout" class="navbar-link">退出登录</a></p>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"></a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+

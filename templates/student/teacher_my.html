@@ -1,0 +1,60 @@
+$def with (session, route, data)
+$:render.common.header(session, route)
+
+
+<style type="text/css">
+	dd{margin-bottom:20px}
+</style>
+
+<div class="container">
+
+<div class="row">
+
+$if data is None:
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">错误！</h3>
+    </div>
+    <div class="panel-body">
+      <p>你还没有选择导师，请先到<a href="$config.root/student/teacher/all">导师库</a>选择导师。</p>
+    </div>
+  </div>
+$else:
+  <div class="">
+    <h2>我的导师
+    $if data.status!='pass':
+      <a href="$config.root/student/delete/$data.id" class="btn btn-primary pull-right">删除导师</a>
+    </h2>
+    <hr>
+  </div>
+  <dl class="dl-horizontal">
+
+    <dt>导师姓名</dt>
+    <dd>$data.name</dd>
+
+    <dt>联系电话</dt>
+    <dd>$data.phone</dd>
+
+    <dt>电子邮箱</dt>
+    <dd>$data.email</dd>
+
+    <dt>信息简介</dt>
+    <dd>$data.intro</dd>
+
+    <dt>审核状态</dt>
+    <dd>
+    $if data.status == 'wait':
+      <span class="label label-default">未审核</span>
+    $elif data.status == 'pass':
+      <span class="label label-success">通过</span>
+    $else:
+      <span class="label label-danger">未通过</span>
+    </dd>
+  </dl>
+
+</div>
+
+</div>
+
+
+$:render.common.foot()

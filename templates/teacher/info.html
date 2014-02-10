@@ -1,0 +1,103 @@
+$def with (session, route, d)
+$:render.common.header(session, route)
+
+
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+  $$(function(){
+
+  })
+</script>
+
+<div class="container">
+
+<div class="row">
+
+  <div class="">
+    <h2>个人信息编辑<small>&nbsp;$d.name</small></h2>
+    <hr>
+  </div>
+
+  <form class="form-horizontal" role="form" method='post' action=''>
+
+    <div class="form-group">
+      <label for="inputEmail1" class="col-sm-2 control-label">姓名</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">$d.name</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail9" class="col-sm-2 control-label">Photo Url</label>
+      <div class="col-sm-10">
+        <input value='$d.photo' type="text" name="photo" class="form-control" id="inputEmail9" placeholder="Photo Url">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">电子邮箱</label>
+      <div class="col-sm-10">
+        <input value='$d.email' type="email" name="email" class="form-control" id="inputEmail3" placeholder="常用电子邮箱">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputEmail4" class="col-sm-2 control-label">联系电话</label>
+      <div class="col-sm-10">
+        <input value='$d.phone' type="tel" name="phone" class="form-control" id="inputEmail4" placeholder="联系电话">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputEmail5" class="col-sm-2 control-label">办公地点</label>
+      <div class="col-sm-10">
+        <input value='$d.office' type="tel" name="office" class="form-control" id="inputEmail5" placeholder="办公室房间号">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputEmail50" class="col-sm-2 control-label">实验室</label>
+      <div class="col-sm-10">
+        <input value='$d.lab' type="tel" name="lab" class="form-control" id="inputEmail50" placeholder="办公室房间号">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail51" class="col-sm-2 control-label">职称</label>
+      <div class="col-sm-10">
+        <input value='$d.pos' type="tel" name="pos" class="form-control" id="inputEmail51" placeholder="办公室房间号">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail6" class="col-sm-2 control-label">个人介绍</label>
+      <div class="col-sm-10">
+        <textarea row='4' name='intro' class="form-control" id="inputEmail6" placeholder="个人情况介绍">$d.intro</textarea>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default">返回</button>
+        <button type="submit" class="btn btn-primary">提交修改</button>
+      </div>
+      </div>
+    </div>
+  </form>
+
+
+</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div><!-- /.modal -->
+
+$:render.common.foot()

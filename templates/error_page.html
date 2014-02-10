@@ -1,0 +1,22 @@
+$def with (session, route, msg)
+$:render.common.header(session, route)
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">错误！</h3>
+      </div>
+      <div class="panel-body">
+        <p>$:msg</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+$:render.common.foot()

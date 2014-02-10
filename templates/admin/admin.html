@@ -1,0 +1,174 @@
+$def with (session, route, data)
+  
+$:render.common.header(session, route)
+
+<div class="container">
+  <div class="row">
+    
+    <h2>系统管理</h2>
+    <hr>
+
+    <ul class="nav nav-tabs nav-tabs-google" id="myTab">
+      <li class="active"><a href="#upload" data-toggle="tab">上传数据</a></li>
+      <li><a href="#add-teacher" data-toggle="tab">添加导师</a></li>
+      <li><a href="#add-student" data-toggle="tab">添加学生</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <!-- 上传数据 -->
+      <div class="tab-pane active" id="upload">
+        <form class="form-horizontal" role="form" style="width:700px;margin-top:40px" method="post" action="$config.root/admin/upload" enctype="multipart/form-data">
+          <div class="alert alert-info">
+            注意：上传新数据会清除系统原有的学生及导师选择数据！
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-3 control-label">数据文件</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="file" name="file">
+              <span class="help-block">数据文件格式为CSV，格式为：班号,学号,姓名,电子邮箱,电话</span>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-3 control-label"></label>
+            <div class="col-lg-7">
+              <button type="submit" class="btn btn-default">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- 添加导师用户 -->
+      <div class="tab-pane" id="add-teacher">
+        <form class="form-horizontal" role="form" style="width:400px;margin-top:40px" method="post" action="$config.root/admin/add/teacher" enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="col-lg-5 control-label">姓名</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="name">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-5 control-label">登录密码</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="pw">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-5 control-label">联系电话</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="phone">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">电子邮箱</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">办公地点</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="office">
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">职称</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="pos">
+            </div>
+          </div> 
+
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">介绍信息</label>
+            <div class="col-lg-7">
+              <textarea class="form-control input" type="text" name="intro"></textarea>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-5 control-label"></label>
+            <div class="col-lg-7">
+              <button type="submit" class="btn btn-default">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- 添加学生用户 -->
+      <div class="tab-pane" id="add-student">
+        <form class="form-horizontal" role="form" style="width:400px;margin-top:40px" method="post" action="$config.root/admin/add/student" enctype="multipart/form-data">
+
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">姓名</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">学号</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="no">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">班号</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="classno">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">登录密码</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="pw">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-5 control-label">联系电话</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="phone">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">电子邮箱</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">介绍信息</label>
+            <div class="col-lg-7">
+              <textarea class="form-control input" type="text" name="intro"></textarea>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-5 control-label"></label>
+            <div class="col-lg-7">
+              <button type="submit" class="btn btn-default">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+  </div>
+</div>
+  
+$:render.common.foot()

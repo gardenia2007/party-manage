@@ -1,0 +1,70 @@
+$def with (session, route)
+$:render.common.header(session, route)
+
+
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+  $$(function(){
+
+  })
+</script>
+
+<div class="container">
+
+<div class="row">
+
+  <div class="">
+    <h2>修改密码<small>&nbsp;</small></h2>
+    <hr>
+  </div>
+
+  <form class="form-horizontal" role="form" method='post' action=''>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">$session.name</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="input1" class="col-sm-2 control-label">原密码</label>
+      <div class="col-sm-10">
+        <input type="password" name="old_password" class="form-control" id="input1" placeholder="请输入原密码">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="input2" class="col-sm-2 control-label">新密码</label>
+      <div class="col-sm-10">
+        <input type="password" name="new_password" class="form-control" id="input2" placeholder="请输入新密码">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="input3" class="col-sm-2 control-label">确认</label>
+      <div class="col-sm-10">
+        <input type="password" name="new_password2" class="form-control" id="input3" placeholder="请再次输入新密码">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default">取消</button>
+        <button type="submit" class="btn btn-primary">提交修改</button>
+      </div>
+    </div>
+  </form>
+
+
+</div>
+
+</div>
+
+
+$:render.common.foot()

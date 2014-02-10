@@ -1,0 +1,168 @@
+$def with (session, plot_data, i)
+  
+$:render.common.header(session)
+
+      <div class="container">
+        <div class="page-header" style="">
+          <h1>学生心情指数
+            <small style="margin-left:20px">$session.grade</small>
+            <small class="pull-right" id="time-range"></small>
+          </h1>
+        </div>
+
+        <!-- 选择条件 -->
+        <div class="row well">
+          <!-- Split button -->
+          <div class="col-md-3">
+            <div class="pull-left" style="margin:8px">类别</div>
+            <div class="pull-left btn-group">
+              <button type="button" class="btn btn-default ">
+                按数值大小
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/status/class">按班级分布</a></li>
+                <li><a href="/status/value">按数值大小</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-5">
+            <div class="pull-left" style="margin:8px">时间范围</div>
+            <div class="pull-left" id="reportrange">
+              <i class="glyphicon glyphicon-calendar"></i>
+              <span>请选择日期</span> <b class="caret"></b>
+            </div>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <!-- 数据展示 -->
+        <div class="row">
+
+          <!-- 图表 -->
+          <div class="col-md-8">
+            <div class="well">
+              <div id="plot" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+          </div>
+
+          <!-- 右侧 -->
+          <div class="col-md-4">
+            <h4>学生列表</h4>
+            <iframe id="list" frameborder="no" style="height:450px"></iframe>
+          </div>
+        </div>
+
+        <hr>
+
+        <script type="text/javascript" src="$config.static/js/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="$config.static/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="$config.static/js/plugins/jqplot.pointLabels.min.js"></script>
+        <script type="text/javascript">
+
+        $$(function () {
+
+          if($i.start != 0){
+            $$('#time-range').html(moment.unix($i.start).format('YYYY-MM-DD HH:ss')
+                + ' ~ ' + moment.unix($i.end - 1).format('YYYY-MM-DD HH:ss'));
+          }
+
+          today = moment();
+          $$('#reportrange').daterangepicker(
+              {
+                ranges: {
+                   //'今日': [moment(), moment()],
+                   '昨日': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                   '最近3天': [moment().subtract('days', 2), moment()],
+                   '最近一周': [moment().subtract('days', 6), moment()],
+                   '最近15天': [moment().subtract('days', 14), moment()],
+                   '最近一月': [moment().subtract('days', 29), moment()],
+                   '最近半年': [moment().subtract('days', 182), today],
+                   // '上个月': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                },
+                startDate: moment().subtract('days', 30),
+                endDate: today,
+                locale: {
+                  applyLabel: '确认',
+                  cancelLabel: '取消',
+                  fromLabel: '从',
+                  toLabel: '到',
+                  customRangeLabel: '自定义时间段',
+                  daysOfWeek: ['日', '一', '二', '三', '四', '五','六'],
+                  monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                  firstDay: 1
+                }
+              },
+              function(start, end) {
+                  // $$('#reportrange span').html(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+                  query = 'start='+start.format('X') + '&end=' + end.add('days', 1).format('X');
+                  // 去掉url中的查询部分，只保留路径
+                  path = location.protocol + '//' + location.host + location.pathname;
+                  console.log(path);
+                  // jump
+                  location.href = path + '?' + query;
+              }
+          );
+
+          plot3 = $$.jqplot('plot', [$plot_data['data']], {
+            // Tell the plot to stack the bars.
+            stackSeries: true,
+            captureRightClick: true,
+            seriesDefaults:{
+              renderer:$$.jqplot.BarRenderer,
+              rendererOptions: {
+                  // Put a 30 pixel margin between bars.
+                  barMargin: 30,
+                  // Highlight bars when mouse button pressed.
+                  // Disables default highlighting on mouse over.
+                  highlightMouseDown: true    
+              },
+              pointLabels: {show: true}
+            },
+            axes: {
+              xaxis: {
+                  ticks: $:plot_data['emotion'] ,
+                  renderer: $$.jqplot.CategoryAxisRenderer
+              },
+              yaxis: {
+                // Don't pad out the bottom of the data range.  By default,
+                // axes scaled as if data extended 10% above and below the
+                // actual range to prevent data points right on grid boundaries.
+                // Don't want to do that here.
+                padMin: 0
+              }
+            },
+            legend: {
+              show: true,
+              location: 'ne',
+              placement: 'outside'
+            },
+            series:[
+              {label:'状态数'}
+            ]
+          });
+          // Bind a listener to the "jqplotDataClick" event.  Here, simply change
+          // the text of the info3 element to show what series and ponit were
+          // clicked along with the data for that point.
+          $$('#plot').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+              console.log('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+              console.log(location.origin + location.pathname + '?x='+seriesIndex+'&y='+pointIndex);
+              // 加载对应的学生列表
+              window.frames['list'].location.href = location.origin + location.pathname 
+                + '/list?x='+seriesIndex+'&y='+pointIndex+'&count='+data[1];
+            }
+          );
+
+
+
+    });
+    
+
+        </script>
+  
+$:render.common.foot()

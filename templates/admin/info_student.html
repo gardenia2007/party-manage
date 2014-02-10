@@ -1,0 +1,39 @@
+$def with (session, route, data)
+  
+$:render.common.header(session, route)
+
+<div class="container">
+  <div class="row">
+    
+    <h2>学生统计</h2>
+    <hr>
+
+    <!-- 学生统计 -->
+    <table class="table table-hover table-striped" style="margin-top:20px">
+      <tr>
+        <th>#</th>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>班号</th>
+        <th>导师</th>
+      </tr>
+    $def get_status(s):
+      $if s == 'fail':
+        失败
+      $elif s == 'pass':
+        通过
+      $else:
+        待审核
+    $for u in data:
+      <tr>
+        <td>$loop.index</td>
+        <td>$u.no</td>
+        <td>$u.stu_name</td>
+        <td>$u.classno</td>
+        <td>$u.tea_name ($get_status(u.status))</td>
+      </tr>
+    </table>
+  </div>
+</div>
+  
+$:render.common.foot()
