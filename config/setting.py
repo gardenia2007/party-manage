@@ -11,10 +11,10 @@ config = web.storage(
 	site_name = U"本科生导师互选系统",
 	site_desc = '本科生导师互选系统',
 	email='gardeniaxy@gmail.com',
-	root = 'http://202.118.228.42/mentor',
-	refer = 'http://202.118.228.42/mentor/',
-	static = '/mentor/static',
-	app_name = 'mentor',
+	root = 'http://csparty.sinaapp.com',
+	refer = 'http://csparty.sinaapp.com/',
+	static = '/static',
+	app_name = 'csparty',
 	# 年级
 	grade = '1',
 )
