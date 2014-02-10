@@ -1,8 +1,151 @@
-$def with (session, content)
-  
-$:render.common.header(session)
+$def with (success)
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-Hello
+    <title>$config.site_name</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="$config.static/css/bootstrap.css" rel="stylesheet">
+    <link href="$config.static/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="$config.static/todc-select2/select2.css" rel="stylesheet">
+    <!-- <link href="$config.static/css/login.css" rel="stylesheet"> -->
 
-$:render.common.foot()
+    <script type="text/javascript" src="$config.static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="$config.static/todc-select2/select2.min.js"></script>
+    <script>
+        $$(document).ready(function() {
+           $$("#select-zb").select2({allowClear:true});
+        });
+    </script>
+    <style type="text/css">
+    	.info-bg{background-color: #33CCFF}
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<div class="row">
+				<!-- <h1 class="text-center"> 这是一套可视化布局系统. </h1> -->
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<h5 class="text-right">请选择支部</h5>
+				</div>
+				<div class="col-md-2">
+					<form>
+						<select name='zb' id="select-zb" class="form-control" >
+							<option value="1">10本第一党支部</option>
+							<option value="1">10本第二党支部</option>
+							<option value="1">11本第一党支部</option>
+							<option value="1">11本第二党支部</option>
+						</select>
+					</form>
+				</div>
+				<div class="col-md-8">
+				</div>
+			</div>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th rowspan='3' class="info-bg">#</th>
+						<th rowspan='3' class="info-bg">姓名</th>
+						<th rowspan='3' class="info-bg">学号</th>
+						<th rowspan='3' class="info-bg">支部书记</th>
+						<th rowspan='3' class="info-bg">提交申请</th>
+						<th rowspan='3' class="info-bg">确定积极分子</th>
+						<th rowspan='3' class="info-bg">入党时间</th>
+						<th rowspan='3' class="info-bg">转正时间</th>
+						<th colspan='14' class="text-center warning">发展阶段</th>
+						<th colspan='9' class="text-center success">预备阶段</th>
+					</tr>
+					<tr>
+						<th rowspan='2' class="warning">入党申请书</th>
+						<th colspan='2' class="warning" class="text-center">思想汇报</th>
+						<th colspan='2' class="warning" class="text-center">考察写实</th>
+						<th rowspan='2' class="warning">政审</th>
+						<th rowspan='2' class="warning">学习成绩单</th>
+						<th rowspan='2' class="warning">班级意见</th>
+						<th rowspan='2' class="warning">班主任意见</th>
+						<th rowspan='2' class="warning">团支部意见</th>
+						<th rowspan='2' class="warning">党校结业证</th>
+						<th rowspan='2' class="warning">自传</th>
+						<th rowspan='2' class="warning">入党志愿书</th>
+						<th rowspan='2' class="warning">发展票决</th>
+
+						<th colspan='2' class="success" class="text-center">思想汇报</th>
+						<th colspan='2' class="success" class="text-center">考察写实</th>
+						<th rowspan='2' class="success">党校结业证</th>
+						<th rowspan='2' class="success">半年总结</th>
+						<th rowspan='2' class="success">全年总结</th>
+						<th rowspan='2' class="success">转正申请</th>
+						<th rowspan='2' class="success">转正票决</th>
+					</tr>
+					<tr>
+						<th class="warning">已交份数</th>
+						<th class="warning">应交份数</th>
+						<th class="warning">已交份数</th>
+						<th class="warning">应交份数</th>
+
+						<th class="success">已交份数</th>
+						<th class="success">应交份数</th>
+						<th class="success">已交份数</th>
+						<th class="success">应交份数</th>
+					</tr>
+				</thead>
+				<tbody>
+				$for i in range(4):
+					<tr>
+						<td>$i</td>
+						<td>李洪祥</td>
+						<td>1100300220</td>
+						<td>王四</td>
+						<td>2010-01-02</td>
+						<td>2010-01-02</td>
+						<td>-</td>
+						<td>-</td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td class="danger">5</td>
+						<td>6</td>
+						<td class="danger">5</td>
+						<td>6</td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-ok"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td><span class="glyphicon glyphicon-remove"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+  </body>
+</html>

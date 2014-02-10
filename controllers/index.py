@@ -2,21 +2,16 @@
 
 import web
 import urllib
+
+from auth import User
 from config import setting
 
 render = web.config._render
 db = web.config._db
 
-class Index:
+class Index(User):
     def GET(self):
-	try:
-		if web.config._session.is_login == False:
-			return web.seeother('/login')
-	except Exception, e:
-		print e
-		return self.error('未知错误，请重试。')
-	else:
-		web.seeother('/student')
+		return render.index(self.session)
     def POST(self):
         pass
 

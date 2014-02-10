@@ -5,7 +5,7 @@ import os
 # render = web.template.render('/var/www/stu-select/templates/', cache=False)
 # db = web.database(dbn='sqlite', db='/var/www/stu-select/db/testdb')
 
-web.config.debug = False
+web.config.debug = True
 
 config = web.storage(
 	site_name = U"本科生导师互选系统",

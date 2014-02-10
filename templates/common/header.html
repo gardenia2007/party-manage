@@ -3,13 +3,7 @@ $def with (session, route)
 $def if_active(ii='teacher_all'):
   $if ii == route :
     active
-$def hello():
-  $if session.role == 'student':
-    $session.name同学，您好！
-  $elif session.role == 'teacher':
-    $session.name老师，您好！
-  $else:
-    $session.name 您好！
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,20 +52,20 @@ $def hello():
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
         <li class="$if_active('teacher_all')"><a href="$config.root/student/teacher/all">导师库</a></li>
-      $if session.role == 'student':
+
         <li class="$if_active('teacher_my')"><a href="$config.root/student/teacher/my">我的导师</a></li>
         <li class="$if_active('student_info')"><a href="$config.root/student/info">个人信息</a></li>
-      $if session.role == 'teacher':
+
         <li class="$if_active('student_my')"><a href="$config.root/teacher/student/my">我的学生</a></li>
         <li class="$if_active('teacher_info')"><a href="$config.root/teacher/info">个人信息</a></li>
-      $if session.is_admin:
+
         <li class="$if_active('info-student')"><a href="$config.root/admin/info/student">学生统计</a></li>
         <li class="$if_active('info-teacher')"><a href="$config.root/admin/info/teacher">导师统计</a></li>
         <li class="$if_active('manage-teacher')"><a href="$config.root/admin/manage/teacher">导师管理</a></li>
         <li class="$if_active('admin')"><a href="$config.root/admin">系统管理</a></li>
       <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
     </ul>
-    <p class="navbar-text pull-right"> $hello() <a href="$config.root/logout" class="navbar-link">退出登录</a></p>
+    <p class="navbar-text pull-right">  <a href="$config.root/logout" class="navbar-link">退出登录</a></p>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"></a></li>
     </ul>
