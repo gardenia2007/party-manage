@@ -7,6 +7,11 @@ urls = (
     "/logout", 					pre_fix + "index.Logout",
     "/test",                    pre_fix + "index.Test",
 
+    "/m",                       pre_fix + "mobile.Index",
+    "/m/(\w+)/info",            pre_fix + "mobile.InfoAll",
+    "/m/(\w+)/info/basic",      pre_fix + "mobile.InfoBasic",
+    "/m/(\w+)/info/update",     pre_fix + "mobile.InfoUpdate",
+
     "/admin",					pre_fix + "admin.Index",
     "/admin/upload",            pre_fix + "admin.Upload",
     "/admin/add/student",       pre_fix + "admin.AddStudent",

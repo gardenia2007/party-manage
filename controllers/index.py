@@ -16,12 +16,7 @@ class Index(User):
 		all_user_db = list(db.query("SELECT * from user,zb where user.zb = zb.id"))
 		all_user = []
 		for user in all_user_db:
-			report = Report()
-			fz_expect_num = report.get_quater_num(user['qdjjfz_sj'])
-			yb_expect_num = report.get_quater_num(user['rdsj_sj'])
-			d = {'expect_sxhb_fz':fz_expect_num, 'expect_kcxs_fz':fz_expect_num,
-				 'expect_sxhb_yb':yb_expect_num, 'expect_kcxs_yb':yb_expect_num}
-			all_user.append(dict(user, **d))
+			all_user.append(self.get_all_info(user))
 		print all_user
 		data = {"zb":all_zb, "user":all_user}
 		return render.index(self.session, data)

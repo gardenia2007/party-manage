@@ -3,6 +3,8 @@ import web
 import datetime
 from config import setting
 
+# translate
+
 class Admin:
 	def __init__(self):
 		self.session = web.config._session
@@ -26,6 +28,14 @@ class User:
 		return setting.render.error_page(web.ctx.session, '', msg)
 	def success(self, msg):
 		return setting.render.success_page(web.ctx.session, '', msg)
+	def get_all_info(self, user):
+		report = Report()
+		fz_expect_num = report.get_quater_num(user['qdjjfz_sj'])
+		yb_expect_num = report.get_quater_num(user['rdsj_sj'])
+		d = {'expect_sxhb_fz':fz_expect_num, 'expect_kcxs_fz':fz_expect_num,
+			 'expect_sxhb_yb':yb_expect_num, 'expect_kcxs_yb':yb_expect_num}
+		new_user = dict(user, **d)
+		return new_user
 
 class Report:
 	def __init__(self):
@@ -40,3 +50,4 @@ class Report:
 		return total_quater
 	def quater(self, d): # 对应的季度
 		return d.month / 4
+
