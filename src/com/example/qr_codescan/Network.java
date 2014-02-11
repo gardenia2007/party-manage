@@ -3,10 +3,10 @@
  */
 package com.example.qr_codescan;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -22,7 +22,7 @@ import android.util.Log;
  * 
  */
 public class Network {
-	private String host = "http://partyonline.sinaapp.com/";
+	private String host = "http://csparty.sinaapp.com/m/";
 
 	/**
 	 * 从远程服务器获取字符串
@@ -31,7 +31,7 @@ public class Network {
 	 */
 	private String fetchRemoteUrl(String path) {
 		URI url = URI.create(path);
-		HttpPost request = new HttpPost(url);
+		HttpGet request = new HttpGet(url);
 		String retSrc = null;
 		try {
 			// 发送请求
@@ -48,12 +48,14 @@ public class Network {
 	/**
 	 * POST数据到远程
 	 */
-	public int postRemote(String path, JSONObject param) {
+	public int postRemote(String path, String param) {
 		HttpPost request = new HttpPost(path);
 		StringEntity se;
 		int token = -1;
 		try {
-			se = new StringEntity(param.toString());
+			se = new StringEntity(param);
+			Log.v("path", path);
+			Log.v("param", param);
 			// 绑定到请求 Entry
 			request.setEntity(se);
 			// 发送请求
@@ -74,24 +76,17 @@ public class Network {
 	/**
 	 * 更新信息列表
 	 */
-	public int updateInfoList(JSONObject param){
-		return postRemote(host+"update_info.php", param);
+	public int updateInfoList(String ID, JSONArray param){
+		return postRemote(host+ ID +"/info/update", param.toString());
 	}
 	/**
 	 * 获取个人信息列表
 	 */
 	public JSONArray fetchInfoList(String ID) {
-		String str = fetchRemoteUrl(host + "info.php?id=" + ID);
-		// String str = "["
-		// +
-		// "{\"filed\":\"sqs_fz\", \"name\":\"申请书\",   \"value\":\"2010-09-12\",\"type\":\"date\"},"
-		// +
-		// "{\"filed\":\"xskc_fz\",\"name\":\"写实考察表\",\"value\":\"2010-11-02\",\"type\":\"date\"},"
-		// +
-		// "{\"filed\":\"sxhb_fz\",\"name\":\"思想汇报\",  \"value\":\"2\"			,\"type\":\"count\"},"
-		// +
-		// "{\"filed\":\"zys_fz\", \"name\":\"志愿书\",    \"value\":\"\"			,\"type\":\"date\"}"
-		// + "]";
+		String str = fetchRemoteUrl(host + ID + "/info");
+		Log.v("url", host + ID + "/info");
+		Log.v("str", str);
+		// String str = "["{\"filed\":\"sqs_fz\", \"name\":\"申请书\",   \"value\":\"2010-09-12\",\"type\":\"date\"}]";
 		try {
 			return new JSONArray(str);
 		} catch (JSONException e) {
@@ -105,11 +100,13 @@ public class Network {
 	 * 
 	 * @return JSONObject
 	 */
-	public JSONObject fetchUserInfo() {
-		String r = fetchRemoteUrl(host + "basic_info.php");
+	public JSONObject fetchUserInfo(String ID) {
+		String str = fetchRemoteUrl(host + ID + "/info/basic");
 		// String r = "{\"name\":\"李洪祥\"}";
+		Log.v("url", host + ID + "/info");
+		Log.v("str", str);
 		try {
-			return new JSONObject(r);
+			return new JSONObject(str);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return new JSONObject();

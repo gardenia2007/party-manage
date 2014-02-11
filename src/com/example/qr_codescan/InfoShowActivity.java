@@ -65,17 +65,15 @@ public class InfoShowActivity extends Activity implements OnItemClickListener {
 		saveBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				JSONObject param = new JSONObject();
+				JSONArray param = null;
 				try {
-					JSONArray infoList = genrateJSONArray();
-					param.put("data", infoList);
-					param.put("id", userID);
+					param = genrateJSONArray();
 					Log.v("param", param.toString());
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 				Network net = new Network();
-				int status = net.updateInfoList(param);
+				int status = net.updateInfoList(userID, param);
 				if(status == 0){
 					showMsgDialog("保存成功！", true);
 				}else{

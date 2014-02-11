@@ -6,7 +6,9 @@
     <ListView
         android:id="@+id/info_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_reload" >
+
     </ListView>
 
     <Button

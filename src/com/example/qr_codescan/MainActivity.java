@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
     }
 	// 测试按钮
 	public void testButton(View view){
-		result = "Test";
+		result = "1100300220";
 		afterScan();
 	}
 	/**
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 		// 从服务器上获取基本信息
 		String username = "";
 		try {
-			username = "你好："+net.fetchUserInfo().getString("name");
+			username = "你好："+net.fetchUserInfo(result).getString("name");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
