@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*- 
 import web
+import datetime
 from config import setting
 
 class Admin:
@@ -26,4 +27,16 @@ class User:
 	def success(self, msg):
 		return setting.render.success_page(web.ctx.session, '', msg)
 
-
+class Report:
+	def __init__(self):
+		pass
+	def get_quater_num(self, begin):
+		if begin is None or begin == '':
+			return 0
+		today = datetime.date.today()
+		# 从begin到today的总季度数
+		total_quater = ( today.year - begin.year ) * 4 \
+			+ ( self.quater(today) - self.quater(begin))
+		return total_quater
+	def quater(self, d): # 对应的季度
+		return d.month / 4

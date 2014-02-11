@@ -1,4 +1,4 @@
-$def with (success)
+$def with (session, data)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +40,7 @@ $def with (success)
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="row">
-				<!-- <h1 class="text-center"> 这是一套可视化布局系统. </h1> -->
+				<!-- <h1 class="text-center"> 计算机学院党员发展跟踪系统 </h1> -->
 			</div>
 			<div class="row">
 				<div class="col-md-2">
@@ -49,10 +49,8 @@ $def with (success)
 				<div class="col-md-2">
 					<form>
 						<select name='zb' id="select-zb" class="form-control" >
-							<option value="1">10本第一党支部</option>
-							<option value="1">10本第二党支部</option>
-							<option value="1">11本第一党支部</option>
-							<option value="1">11本第二党支部</option>
+						$for zb in data['zb']:
+							<option value="$zb.id">$zb['name']</option>
 						</select>
 					</form>
 				</div>
@@ -64,8 +62,8 @@ $def with (success)
 					<tr>
 						<th rowspan='3' class="info-bg">#</th>
 						<th rowspan='3' class="info-bg">姓名</th>
-						<th rowspan='3' class="info-bg">学号</th>
-						<th rowspan='3' class="info-bg">支部书记</th>
+						<!-- <th rowspan='3' class="info-bg">学号</th> -->
+						<!-- <th rowspan='3' class="info-bg">支部书记</th> -->
 						<th rowspan='3' class="info-bg">提交申请</th>
 						<th rowspan='3' class="info-bg">确定积极分子</th>
 						<th rowspan='3' class="info-bg">入党时间</th>
@@ -108,39 +106,54 @@ $def with (success)
 					</tr>
 				</thead>
 				<tbody>
-				$for i in range(4):
+				$# 显示日期 ，如没有显示'-'
+				$def show_date(v): 
+					$if v is not None:
+						$return v
+					$else:
+						-
+				$# 如果非空返回'ok'icon对应的class
+				$def show_ok(v):
+					$if v is None:glyphicon glyphicon-remove
+					$else:glyphicon glyphicon-ok
+
+				$# 已交材料份数是否等于应交材料份数
+				$def show_expect_ok(now, expect):
+					$if now < expect:warning
+
+				$for u in data['user']:
 					<tr>
-						<td>$i</td>
-						<td>李洪祥</td>
-						<td>1100300220</td>
-						<td>王四</td>
-						<td>2010-01-02</td>
-						<td>2010-01-02</td>
-						<td>-</td>
-						<td>-</td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td class="danger">5</td>
-						<td>6</td>
-						<td class="danger">5</td>
-						<td>6</td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-ok"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
-						<td><span class="glyphicon glyphicon-remove"></span></td>
+						<td>$loop.index</td>
+						<td>$u['xm']</td>
+						<!-- <td>$u['xh']</td> -->
+						<!-- <td>王四</td> -->
+						<td>$show_date(u['rdsqs_sj'])</td>
+						<td>$show_date(u['qdjjfz_sj'])</td>
+						<td>$show_date(u['rdsj_sj'])</td>
+						<td>$show_date(u['zzsj_sj'])</td>
+						<td><span class="$show_ok(u['rdsqs_fz'])"></span></td>
+						<td class="$show_expect_ok(u['sxhb_fz'], u['expect_sxhb_fz'])">$u['sxhb_fz']</td>
+						<td>$u['expect_sxhb_fz']</td>
+						<td class="$show_expect_ok(u['kcxs_fz'], u['expect_kcxs_fz'])">$u['kcxs_fz']</td>
+						<td>$u['expect_kcxs_fz']</td>
+						<td><span class="$show_ok(u['zs_fz'])"></span></td>
+						<td><span class="$show_ok(u['xxcjd_fz'])"></span></td>
+						<td><span class="$show_ok(u['bjyj_fz'])"></span></td>
+						<td><span class="$show_ok(u['bzryj_fz'])"></span></td>
+						<td><span class="$show_ok(u['tzbyj_fz'])"></span></td>
+						<td><span class="$show_ok(u['dxjyzs_fz'])"></span></td>
+						<td><span class="$show_ok(u['zz_fz'])"></span></td>
+						<td><span class="$show_ok(u['rdzys_fz'])"></span></td>
+						<td><span class="$show_ok(u['fzpj_fz'])"></span></td>
+						<td class="$show_expect_ok(u['sxhb_yb'], u['expect_sxhb_yb'])">$u['sxhb_yb']</td>
+						<td>$u['expect_sxhb_yb']</td>
+						<td class="$show_expect_ok(u['kcxs_yb'], u['expect_kcxs_yb'])">$u['kcxs_yb']</td>
+						<td>$u['expect_kcxs_yb']</td>
+						<td><span class="$show_ok(u['dxjyzs_yb'])"></span></td>
+						<td><span class="$show_ok(u['bnzj_yb'])"></span></td>
+						<td><span class="$show_ok(u['qnzj_yb'])"></span></td>
+						<td><span class="$show_ok(u['zzsq_yb'])"></span></td>
+						<td><span class="$show_ok(u['zzpj_yb'])"></span></td>
 					</tr>
 				</tbody>
 			</table>
