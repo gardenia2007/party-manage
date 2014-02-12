@@ -162,7 +162,7 @@ public class InfoShowActivity extends Activity implements OnItemClickListener {
 				JSONObject item = (JSONObject) data.get(i);
 				map.put("name", item.getString("name"));
 				map.put("value", item.getString("value"));
-				map.put("filed", item.getString("filed"));
+				map.put("field", item.getString("field"));
 				map.put("type", item.getString("type"));
 				dataList.add(map);
 			}
@@ -209,9 +209,6 @@ public class InfoShowActivity extends Activity implements OnItemClickListener {
 								Log.v("item", item.toString());
 								dataList.set(position, item);
 								adapter.notifyDataSetChanged();
-								Toast.makeText(InfoShowActivity.this,
-										dataList.toString(), Toast.LENGTH_SHORT)
-										.show();
 							}
 						}).setNegativeButton("取消",// 设置取消按钮
 						new DialogInterface.OnClickListener() {
