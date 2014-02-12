@@ -12,9 +12,22 @@ urls = (
     "/m/(\w+)/info/basic",      pre_fix + "mobile.InfoBasic",
     "/m/(\w+)/info/update",     pre_fix + "mobile.InfoUpdate",
 
-    "/admin",					pre_fix + "admin.Index",
-    "/admin/upload",            pre_fix + "admin.Upload",
-    "/admin/add/student",       pre_fix + "admin.AddStudent",
+    "/admin",                   pre_fix + "admin.Index",
+    "/admin/login",             pre_fix + "admin.Login",
+    "/admin/logout",            pre_fix + "admin.Logout",
+    
+    "/admin/user/add",          pre_fix + "admin.AddUser",
+    "/admin/user/(\d+)/del",    pre_fix + "admin.DelUser",
+    "/admin/user/list",         pre_fix + "admin.ListUser",
+
+    "/admin/zb/add",            pre_fix + "admin.AddZb",
+    "/admin/zb/(\d+)/del",      pre_fix + "admin.DelZb",
+    "/admin/zb/list",           pre_fix + "admin.ListZb",
+
+    "/admin/zs/add",            pre_fix + "admin.AddZs",
+    "/admin/zs/(\d+)/del",      pre_fix + "admin.DelZs",
+    "/admin/zs/list",           pre_fix + "admin.ListZs",
+
     "/admin/add/teacher",       pre_fix + "admin.AddTeacher",
     "/admin/del/teacher/(\d+)", pre_fix + "admin.DelTeacher",
     "/admin/teacher/info/(\d+)",pre_fix + "admin.UpdateTeacherInfo",

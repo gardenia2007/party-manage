@@ -17,6 +17,7 @@ $def if_active(ii='teacher_all'):
   <link href="$config.static/css/bootstrap.css" rel="stylesheet">
   <link href="$config.static/css/todc-bootstrap.css" rel="stylesheet">
   <link href="$config.static/css/sticky-footer.css" rel="stylesheet">
+  <link href="$config.static/css/datepicker3.css" rel="stylesheet">
   <style type="text/css">
 
   </style>
@@ -29,9 +30,11 @@ $def if_active(ii='teacher_all'):
 
   <script src="$config.static/js/jquery.min.js"></script>
   <script src="$config.static/js/bootstrap.min.js"></script>
+  <script src="$config.static/js/bootstrap-datepicker.js"></script>
+  <script src="$config.static/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 </head>
-         
+
 <body>
 
 <div id="wrap">
@@ -45,27 +48,31 @@ $def if_active(ii='teacher_all'):
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">$config.site_name</a>
+    <a class="navbar-brand" href="/"><strong>$config.site_name</strong></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-        <li class="$if_active('teacher_all')"><a href="$config.root/student/teacher/all">导师库</a></li>
+        <li class="$if_active('user_add')"><a href="$config.root/admin/user/add">添加党员</a></li>
+        <li class="$if_active('user_list')"><a href="$config.root/admin/user/list">党员列表</a></li>
 
-        <li class="$if_active('teacher_my')"><a href="$config.root/student/teacher/my">我的导师</a></li>
-        <li class="$if_active('student_info')"><a href="$config.root/student/info">个人信息</a></li>
+        <li class="$if_active('zb_add')"><a href="$config.root/admin/zb/add">添加党支部</a></li>
+        <li class="$if_active('zb_list')"><a href="$config.root/admin/zb/list">党支部列表</a></li>
 
-        <li class="$if_active('student_my')"><a href="$config.root/teacher/student/my">我的学生</a></li>
-        <li class="$if_active('teacher_info')"><a href="$config.root/teacher/info">个人信息</a></li>
+        <li class="$if_active('zs_add')"><a href="$config.root/admin/zs/add">添加党支书</a></li>
+        <li class="$if_active('zs_list')"><a href="$config.root/admin/zs/list">党支书列表</a></li>
 
-        <li class="$if_active('info-student')"><a href="$config.root/admin/info/student">学生统计</a></li>
-        <li class="$if_active('info-teacher')"><a href="$config.root/admin/info/teacher">导师统计</a></li>
-        <li class="$if_active('manage-teacher')"><a href="$config.root/admin/manage/teacher">导师管理</a></li>
         <li class="$if_active('admin')"><a href="$config.root/admin">系统管理</a></li>
-      <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
+        <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
     </ul>
-    <p class="navbar-text pull-right">  <a href="$config.root/logout" class="navbar-link">退出登录</a></p>
+    <p class="navbar-text pull-right">
+      $if session.is_login and session.power == '1':
+        <span></span>
+      $elif session.is_login :
+        <span>欢迎$session.name（$session.zb）</span>
+      <a href="$config.root/admin/logout" class="navbar-link">退出登录</a>
+    </p>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"></a></li>
     </ul>

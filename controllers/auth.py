@@ -9,25 +9,24 @@ class Admin:
 	def __init__(self):
 		self.session = web.config._session
 		try:
-			if not (web.ctx.session.is_login and web.ctx.session.is_admin):
-				raise web.seeother('/login')
+			if not self.session.is_login:
+				raise web.seeother('/admin/login')
 		except Exception, e:
-			#raise e
 			return self.error('未知错误，请重试。')
 		else:
 			pass
 	def error(self, msg):
-		return setting.render.error_page(web.ctx.session, '', msg)
+		return web.config._render.error_page(self.session, '', msg)
 	def success(self, msg):
-		return setting.render.success_page(web.ctx.session, '', msg)
+		return web.config._render.success_page(self.session, '', msg)
 
 class User:
 	def __init__(self):
 		self.session = web.config._session
 	def error(self, msg):
-		return setting.render.error_page(web.ctx.session, '', msg)
+		return web.config._render.error_page(self.session, '', msg)
 	def success(self, msg):
-		return setting.render.success_page(web.ctx.session, '', msg)
+		return web.config._render.success_page(self.session, '', msg)
 	def get_all_info(self, user):
 		report = Report()
 		fz_expect_num = report.get_quater_num(user['qdjjfz_sj'])

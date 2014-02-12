@@ -1,0 +1,50 @@
+$def with (session, route, data)
+  
+$:render.common.header(session, route)
+
+<div class="container">
+  <div class="row">
+    
+    <h2>本支部全部党员列表</h2>
+    <hr>
+
+    <table class="table table-hover " style="margin-top:20px">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>姓名</th>
+          <th>学号</th>
+          <th>提交申请</th>
+          <th>确定积极分子</th>
+          <th>入党时间</th>
+          <th>转正时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      $# 显示日期 ，如没有显示'-'
+      $def show_date(v): 
+        $if v is not None:
+          $return v
+        $else:
+          -
+      $for u in data['all_user']:
+        <tr>
+          <td>$loop.index</td>
+          <td>$u['xm']</td>
+          <td>$u['xh']</td>
+          <td>$show_date(u['rdsqs_sj'])</td>
+          <td>$show_date(u['qdjjfz_sj'])</td>
+          <td>$show_date(u['rdsj_sj'])</td>
+          <td>$show_date(u['zzsj_sj'])</td>
+          <td>
+            <a class="btn btn-primary" target="_blank" href="$config.root/admin/user/$u['id']/update">更新</a>
+            <a class="btn btn-danger"  target="" href="$config.root/admin/user/$u['id']/del">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+$:render.common.foot()

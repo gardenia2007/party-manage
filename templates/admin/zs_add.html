@@ -1,0 +1,60 @@
+$def with (session, route, data)
+  
+$:render.common.header(session, route)
+
+<script type="text/javascript">
+  $$(function(){
+
+  })
+</script>
+
+<div class="container">
+  <div class="row">
+    
+    <h2>添加党支书</h2>
+    <hr>
+
+    <div class="col-lg-8">
+
+      <!-- 添加党支书用户 -->
+      <div class="" id="add-student">
+        <form class="form-horizontal" role="form" style="margin-top:40px" method="post" action="$config.root/admin/zs/add" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">姓名(登录名)</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">登录密码</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" name="pw">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">所属支部</label>
+            <div class="col-lg-7">
+              <select name='zb' id="select-zb" class="form-control" >
+              $for it in data['all_zb']:
+                <option value="$it['id']">$it['name']</option>
+              </select>
+            </div>
+          </div>
+          <hr>
+
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-5 control-label"></label>
+            <div class="col-lg-7">
+              <button type="submit" class="btn btn-default">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+  </div>
+</div>
+  
+$:render.common.foot()

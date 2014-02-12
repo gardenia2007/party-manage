@@ -8,11 +8,11 @@ import os
 web.config.debug = True
 
 config = web.storage(
-	site_name = U"本科生导师互选系统",
-	site_desc = '本科生导师互选系统',
+	site_name = U"计算机学院党员发展推进系统",
+	site_desc = '计算机学院党员发展推进系统',
 	email='gardeniaxy@gmail.com',
-	root = 'http://csparty.sinaapp.com',
-	refer = 'http://csparty.sinaapp.com/',
+	root = '',
+	refer = '',
 	static = '/static',
 	app_name = 'csparty',
 	# 年级

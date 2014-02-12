@@ -1,0 +1,34 @@
+$def with (session, route, data)
+  
+$:render.common.header(session, route)
+
+<div class="container">
+  <div class="row">
+    
+    <h2>全部党支部列表</h2>
+    <hr>
+
+    <table class="table table-hover " style="margin-top:20px">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      $for u in data['all_zb']:
+        <tr>
+          <td>$loop.index</td>
+          <td>$u['name']</td>
+          <td>
+            <!-- <a class="btn btn-primary" target="_blank" href="$config.root/admin/zb/$u['id']/update">更新</a> -->
+            <a class="btn btn-danger"  target="" href="$config.root/admin/zb/$u['id']/del">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+$:render.common.foot()
