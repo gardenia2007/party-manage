@@ -22,8 +22,8 @@ $def with (session, data)
     <script>
         $$(document).ready(function() {
            // $$("#select-zb").select2({allowClear:true});
-           $$(".select-zb").click(function(){
-           	id = $$(this).val();
+           $$("#select-zb").change(function(){
+           	id = $$(this).children('option:selected').val();
            	l = window.location;
            	url = l.protocol+'//'+l.host+l.pathname+'?id='+id;
            	window.location.href = url;
@@ -46,7 +46,7 @@ $def with (session, data)
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="row">
-				<!-- <h1 class="text-center"> 计算机学院党员发展跟踪系统 </h1> -->
+				<h1 class="text-center"> 计算机学院党员发展推进系统 </h1>
 			</div>
 			<div class="row">
 				<div class="col-md-2">
@@ -55,9 +55,14 @@ $def with (session, data)
 				<div class="col-md-2">
 					<form>
 						<select name='zb' id="select-zb" class="form-control" >
-							<option class="select-zb" value="all">全部党支部</option>
+
+							$# 设置selected状态
+							$def check_selected(a, b):
+								$if int(a) == int(b):
+									selected=selected
+							<option class="select-zb" value="90000" $check_selected(data['cur_id'], 90000)>全部党支部</option>
 						$for zb in data['zb']:
-							<option class="select-zb" value="$zb.id">$zb['name']</option>
+							<option class="select-zb" value="$zb.id" $check_selected(data['cur_id'], zb.id)>$zb['name']</option>
 						</select>
 					</form>
 				</div>

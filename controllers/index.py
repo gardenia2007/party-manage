@@ -12,7 +12,7 @@ db = web.config._db
 
 class Index(User):
 	def GET(self):
-		zb = web.input(id='all').id
+		zb = web.input(id=90000).id
 		all_zb = list(db.select('zb', where="id<>0")) # 不显示id为0的那条记录（保留使用）
 		if zb == 'all': # 显示全部的党员
 			all_user_db = list(db.query("SELECT * from user,zb where user.zb = zb.id and user.zb <> 0"))
@@ -23,7 +23,7 @@ class Index(User):
 			#  append应交材料份数等信息
 			all_user.append(self.get_all_info(user))
 		print all_user
-		data = {"zb":all_zb, "user":all_user}
+		data = {"zb":all_zb, "user":all_user, "cur_id":zb}
 		return render.index(self.session, data)
 	def POST(self):
 		pass
