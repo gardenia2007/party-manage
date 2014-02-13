@@ -33,6 +33,18 @@ $def if_active(ii='teacher_all'):
   <script src="$config.static/js/bootstrap-datepicker.js"></script>
   <script src="$config.static/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
+  <script type="text/javascript" src="$config.static/js/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript" src="$config.static/js/jquery.metadata.js"></script>
+  <script type="text/javascript" src="$config.static/js/jquery.tablecloth.js"></script>
+  <link href="$config.static/css/tablecloth.css" rel="stylesheet">
+  <script>
+    $$(function(){
+      $$("table").tablecloth({
+        // theme: 'dark',
+        sortable: true,
+      });
+    })
+  </script>
 </head>
 
 <body>

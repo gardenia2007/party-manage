@@ -18,6 +18,7 @@ urls = (
     
     "/admin/user/add",          pre_fix + "admin.AddUser",
     "/admin/user/(\d+)/del",    pre_fix + "admin.DelUser",
+    "/admin/user/(\d+)/update", pre_fix + "admin.UpdateUser",
     "/admin/user/list",         pre_fix + "admin.ListUser",
 
     "/admin/zb/add",            pre_fix + "admin.AddZb",

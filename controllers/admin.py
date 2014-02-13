@@ -78,6 +78,20 @@ class AddUser(Admin):
 		else:
 			return self.error('添加失败，请重试！')
 
+class UpdateUser(Admin):
+	def __init__(self):
+		Admin.__init__(self)
+	def GET(self):
+		return render.admin.user_add(self.session, 'user_add')
+	def POST(self):
+		i = web.input()
+		r = db.insert('user', xm=i.name, xh=i.no, rdsqs_sj=i.rdsqs_sj, qdjjfz_sj=i.qdjjfz_sj,\
+			rdsj_sj=i.rdsj_sj, zzsj_sj=i.zzsj_sj)
+		if r :
+			return self.success('添加成功！')
+		else:
+			return self.error('添加失败，请重试！')
+
 class DelUser(Admin):
 	def __init__(self):
 		Admin.__init__(self)
