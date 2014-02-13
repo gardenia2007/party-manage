@@ -21,7 +21,13 @@ $def with (session, data)
     <script type="text/javascript" src="$config.static/todc-select2/select2.min.js"></script>
     <script>
         $$(document).ready(function() {
-           $$("#select-zb").select2({allowClear:true});
+           // $$("#select-zb").select2({allowClear:true});
+           $$(".select-zb").click(function(){
+           	id = $$(this).val();
+           	l = window.location;
+           	url = l.protocol+'//'+l.host+l.pathname+'?id='+id;
+           	window.location.href = url;
+           });
         });
     </script>
     <style type="text/css">
@@ -49,8 +55,9 @@ $def with (session, data)
 				<div class="col-md-2">
 					<form>
 						<select name='zb' id="select-zb" class="form-control" >
+							<option class="select-zb" value="all">全部党支部</option>
 						$for zb in data['zb']:
-							<option value="$zb.id">$zb['name']</option>
+							<option class="select-zb" value="$zb.id">$zb['name']</option>
 						</select>
 					</form>
 				</div>

@@ -12,10 +12,15 @@ db = web.config._db
 
 class Index(User):
 	def GET(self):
-		all_zb = list(db.select('zb'))
-		all_user_db = list(db.query("SELECT * from user,zb where user.zb = zb.id"))
+		zb = web.input(id='all').id
+		all_zb = list(db.select('zb', where="id<>0")) # 不显示id为0的那条记录（保留使用）
+		if zb == 'all': # 显示全部的党员
+			all_user_db = list(db.query("SELECT * from user,zb where user.zb = zb.id and user.zb <> 0"))
+		else:
+			all_user_db = list(db.query("SELECT user.*, zb.name as zb_name from user,zb where user.zb = zb.id and user.zb=$zb", vars={'zb':zb}))
 		all_user = []
 		for user in all_user_db:
+			#  append应交材料份数等信息
 			all_user.append(self.get_all_info(user))
 		print all_user
 		data = {"zb":all_zb, "user":all_user}

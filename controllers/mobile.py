@@ -13,7 +13,7 @@ db = web.config._db
 
 
 require = [
-	{'field':'rdsqs_fz',		'name':'入党申请书',				 'type':'date'},
+	# {'field':'rdsqs_fz',		'name':'入党申请书',				 'type':'date'},
 	{'field':'sxhb_fz', 		'name':'思想汇报',				 'type':'count'},
 	{'field':'kcxs_fz', 		'name':'考察写实',				 'type':'count'},
 	{'field':'zs_fz', 			'name':'政审',				 	 'type':'date'},
@@ -62,7 +62,7 @@ class InfoAll:
 
 class InfoUpdate:
 	def GET(self, uid):
-		return self.POST('1100300220')
+		pass
 	def POST(self, uid):
 		raw_data = web.data()
 		# raw_data = '[{"field":"rdsqs_fz","name":"入党申请书","value":"1234","type":"date"},{"field":"sxhb_fz","name":"思想汇报","value":"1234","type":"count"}]'

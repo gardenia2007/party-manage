@@ -8,13 +8,10 @@ from config import setting
 class Admin:
 	def __init__(self):
 		self.session = web.config._session
-		try:
-			if not self.session.is_login:
-				raise web.seeother('/admin/login')
-		except Exception, e:
-			return self.error('未知错误，请重试。')
-		else:
-			pass
+		if not self.session.is_login:
+			raise web.seeother('/admin/login')
+		# except Exception, e:
+			# return self.error('未知错误，请重试。')
 	def error(self, msg):
 		return web.config._render.error_page(self.session, '', msg)
 	def success(self, msg):

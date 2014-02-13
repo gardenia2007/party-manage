@@ -1,4 +1,4 @@
-$def with (session, route)
+$def with (session, route, data)
   
 $:render.common.header(session, route)
 
@@ -28,16 +28,29 @@ $:render.common.header(session, route)
         <form class="form-horizontal" role="form" style=";margin-top:40px" method="post" action="$config.root/admin/user/add" enctype="multipart/form-data">
 
           <div class="form-group">
+          $if session.power == '1':
+            <label class="col-lg-5 control-label">所属支部</label>
+            <div class="col-lg-7">
+              <div class="">
+                <select name='zb' class="form-control" >
+                $for zb in data['all_zb']:
+                  <option value="$zb.id">$zb['name']</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
             <label class="col-lg-5 control-label">姓名</label>
             <div class="col-lg-7">
-              <input class="form-control" type="text" name="name">
+              <input class="form-control" type="text" name="name" required>
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-5 control-label">学号</label>
             <div class="col-lg-7">
-              <input class="form-control" type="text" name="no">
+              <input class="form-control" type="text" name="no" required>
             </div>
           </div>
 
@@ -45,7 +58,7 @@ $:render.common.header(session, route)
             <label class="col-lg-5 control-label">入党申请书时间</label>
             <div class="col-lg-7">
               <div class="input-group date">
-                <input name="rdsqs_sj" type="text" class="form-control input">
+                <input name="rdsqs_sj" type="text" class="form-control input" required>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
               </div>
             </div>
@@ -80,6 +93,8 @@ $:render.common.header(session, route)
               </div>
             </div>
           </div>
+
+
 <!-- 
           <div class="form-group">
             <label class="col-lg-5 control-label">电子邮箱</label>

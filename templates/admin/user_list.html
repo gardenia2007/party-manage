@@ -5,7 +5,7 @@ $:render.common.header(session, route)
 <div class="container">
   <div class="row">
     
-    <h2>本支部全部党员列表</h2>
+    <h2>全部党员列表</h2>
     <hr>
 
     <table class="table table-hover table-striped table-condensed" style="margin-top:20px">
@@ -14,6 +14,7 @@ $:render.common.header(session, route)
           <th>#</th>
           <th>姓名</th>
           <th>学号</th>
+          $if session.power == '1':<th>所属支部</th>
           <th>提交申请</th>
           <th>确定积极分子</th>
           <th>入党时间</th>
@@ -33,13 +34,15 @@ $:render.common.header(session, route)
           <td>$loop.index</td>
           <td>$u['xm']</td>
           <td>$u['xh']</td>
+          $if session.power == '1':<td>$u['zb_name']</td>
           <td>$show_date(u['rdsqs_sj'])</td>
           <td>$show_date(u['qdjjfz_sj'])</td>
           <td>$show_date(u['rdsj_sj'])</td>
           <td>$show_date(u['zzsj_sj'])</td>
           <td>
             <a class="btn btn-primary" target="_blank" href="$config.root/admin/user/$u['id']/update">更新</a>
-            <a class="btn btn-danger"  target="" href="$config.root/admin/user/$u['id']/del">删除</a>
+            <a class="btn btn-danger" target="" href="$config.root/admin/user/$u['id']/del">删除</a>
+            <!-- <a class="btn btn-danger" target="" href="$config.root/admin/user/$u['id']/del/forever" onclick="if(!confirm("确认永远删除$u['xm']吗？\n该操作不可恢复"))return false;">永远删除</a> -->
           </td>
         </tr>
       </tbody>

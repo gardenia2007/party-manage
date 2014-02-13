@@ -1,0 +1,317 @@
+$def with (session, route, data)
+$ info = data['info']
+$:render.common.header(session, route)
+
+<script type="text/javascript">
+  $$(function(){
+    $$('.input-group.date').datepicker({
+      format: "yyyy-mm-dd",
+      startView: 1,
+      todayBtn: true,
+      language: "zh-CN",
+      todayHighlight: true,
+      autoclose : true
+    });
+  })
+</script>
+
+<div class="container">
+  <div class="row">
+    
+    <h2>更新党员信息</h2>
+    <hr>
+
+    <div class="col-lg-8">
+
+      <div class="" id="">
+        <form class="form-horizontal" role="form" style=";margin-top:40px" method="post" action="$config.root/admin/user/$info['id']/update">
+
+          <legend>基本信息</legend>
+
+          $# 设置selected状态
+          $def check_selected(a, b):
+            $if a == b:
+              selected=selected
+          <div class="form-group">
+          $if session.power == '1':
+            <label class="col-lg-5 control-label">所属支部</label>
+            <div class="col-lg-7">
+              <div class="">
+                <select name='zb' class="form-control" >
+                $for zb in data['all_zb']:
+                  <option value="$zb.id" $check_selected(zb['id'], info['zb'])>$zb['name']</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">姓名</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" disabled value="$info['xm']">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">学号</label>
+            <div class="col-lg-7">
+              <input class="form-control" type="text" disabled value="$info['xh']">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">入党申请书时间</label>
+            <div class="col-lg-7">
+              <div class="input-group">
+                <input type="text" class="form-control input" disabled value="$info['rdsqs_sj']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">确定积极分子时间</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="qdjjfz_sj" type="text" class="form-control input" value="$info['qdjjfz_sj']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">入党时间</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="rdsj_sj" type="text" class="form-control input" value="$info['rdsj_sj']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">转正时间</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="zzsj_sj" type="text" class="form-control input" value="$info['zzsj_sj']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <legend>发展阶段</legend>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">思想汇报</label>
+            <div class="col-lg-7">
+              <div class="input-group">
+                <input name="sxhb_fz" type="text" class="form-control input" value="$info['sxhb_fz']">
+                <span class="input-group-addon">份</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">考察写实</label>
+            <div class="col-lg-7">
+              <div class="input-group">
+                <input name="kcxs_fz" type="text" class="form-control input" value="$info['kcxs_fz']">
+                <span class="input-group-addon">份</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">政审</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="zs_fz" type="text" class="form-control input" value="$info['zs_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">学习成绩单</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="xxcjd_fz" type="text" class="form-control input" value="$info['xxcjd_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">班级意见</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="bjyj_fz" type="text" class="form-control input" value="$info['bjyj_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-5 control-label">班主任意见</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="bzryj_fz" type="text" class="form-control input" value="$info['bzryj_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">团支部意见</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="tzbyj_fz" type="text" class="form-control input" value="$info['tzbyj_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">党校结业证</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="dxjyzs_fz" type="text" class="form-control input" value="$info['dxjyzs_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">自传</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="zz_fz" type="text" class="form-control input" value="$info['zz_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">入党志愿书</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="rdzys_fz" type="text" class="form-control input" value="$info['rdzys_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">发展票决</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="fzpj_fz" type="text" class="form-control input" value="$info['fzpj_fz']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <legend>转正阶段</legend>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">思想汇报</label>
+            <div class="col-lg-7">
+              <div class="input-group">
+                <input name="sxhb_yb" type="text" class="form-control input" value="$info['sxhb_yb']">
+                <span class="input-group-addon">份</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">考察写实</label>
+            <div class="col-lg-7">
+              <div class="input-group">
+                <input name="kcxs_yb" type="text" class="form-control input" value="$info['kcxs_yb']">
+                <span class="input-group-addon">份</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">党校结业证</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="dxjyzs_yb" type="text" class="form-control input" value="$info['dxjyzs_yb']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">半年总结</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="bnzj_yb" type="text" class="form-control input" value="$info['bnzj_yb']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">全年总结</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="qnzj_yb" type="text" class="form-control input" value="$info['qnzj_yb']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">转正申请</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="zzsq_yb" type="text" class="form-control input" value="$info['zzsq_yb']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-5 control-label">转正票决</label>
+            <div class="col-lg-7">
+              <div class="input-group date">
+                <input name="zzpj_yb" type="text" class="form-control input" value="$info['zzpj_yb']">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+          </div>
+
+
+<!-- 
+          <div class="form-group">
+            <label class="col-lg-5 control-label">电子邮箱</label>
+            <div class="col-lg-7">
+              <input class="form-control" class="input" type="text" name="email">
+            </div>
+          </div>
+ -->
+ <!-- 
+          <div class="form-group">
+            <label class="col-lg-5 control-label">介绍信息</label>
+            <div class="col-lg-7">
+              <textarea class="form-control input" type="text" name="intro"></textarea>
+            </div>
+          </div>
+ -->
+          <hr>
+
+          <div class="form-group">
+            <label for="inputPassword" class="col-lg-5 control-label"></label>
+            <div class="col-lg-7">
+              <button type="submit" class="btn btn-default">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+  </div>
+</div>
+  
+$:render.common.foot()

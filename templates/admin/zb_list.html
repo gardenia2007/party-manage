@@ -22,8 +22,10 @@ $:render.common.header(session, route)
           <td>$loop.index</td>
           <td>$u['name']</td>
           <td>
-            <!-- <a class="btn btn-primary" target="_blank" href="$config.root/admin/zb/$u['id']/update">更新</a> -->
-            <a class="btn btn-danger"  target="" href="$config.root/admin/zb/$u['id']/del">删除</a>
+          
+            <a class="btn btn-danger
+             $if u['id'] == 0:disabled
+             " target="" href="$config.root/admin/zb/$u['id']/del">删除</a>
           </td>
         </tr>
       </tbody>
