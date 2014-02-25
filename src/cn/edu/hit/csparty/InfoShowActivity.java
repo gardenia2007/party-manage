@@ -1,4 +1,4 @@
-package com.example.qr_codescan;
+package cn.edu.hit.csparty;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +12,8 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.edu.hit.csparty.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

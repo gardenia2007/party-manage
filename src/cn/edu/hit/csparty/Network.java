@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.qr_codescan;
+package cn.edu.hit.csparty;
 
 import java.net.URI;
 

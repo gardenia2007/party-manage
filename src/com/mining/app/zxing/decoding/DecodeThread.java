@@ -23,14 +23,15 @@ import java.util.concurrent.CountDownLatch;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.qr_codescan.MipcaActivityCapture;
+import cn.edu.hit.csparty.MipcaActivityCapture;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
 
 /**
  * This thread does all the heavy lifting of decoding the images.
- * ½âÂëÏß³Ì
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
  */
 final class DecodeThread extends Thread {
 

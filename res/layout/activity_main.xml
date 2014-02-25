@@ -3,44 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="@+string/scan" />
-
     <TextView
         android:id="@+id/username"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button2"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button2"
-        android:gravity="center_horizontal"
-        android:lines="2"
+        android:layout_alignParentTop="true"
+        android:lines="4"
         android:textColor="@color/possible_result_points"
         android:textIsSelectable="true"
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1"
-        android:onClick="testButton"
-        android:text="@+string/scan_test" />
-
-    <Button
         android:id="@+id/show_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/username"
         android:onClick="showInfoList"
         android:text="@+string/show_info"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/show_info"
+        android:layout_alignParentLeft="true"
+        android:text="@+string/scan" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="testButton"
+        android:text="@+string/scan_test" />
 
 </RelativeLayout>

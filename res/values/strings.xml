@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">QR_CodeScan</string>
+    <string name="app_name">CS Party</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     
     <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
     <string name="scan">扫描二维码</string>
-    <string name="scan_test">模拟扫描二维码</string>
+    <string name="scan_input">手动输入编号</string>
     <string name="reload_info">重新加载</string>
     <string name="save">保存更改</string>
     <string name="show_info">显示全部信息</string>

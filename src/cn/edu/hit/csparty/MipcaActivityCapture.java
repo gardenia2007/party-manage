@@ -1,4 +1,4 @@
-package com.example.qr_codescan;
+package cn.edu.hit.csparty;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import cn.edu.hit.csparty.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.mining.app.zxing.camera.CameraManager;
