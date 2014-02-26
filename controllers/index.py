@@ -12,9 +12,9 @@ db = web.config._db
 
 class Index(User):
 	def GET(self):
-		zb = web.input(id=90000).id
+		zb = int(web.input(id=90000).id)
 		all_zb = list(db.select('zb', where="id<>0")) # 不显示id为0的那条记录（保留使用）
-		if zb == 'all': # 显示全部的党员
+		if zb == 90000: # 显示全部的党员
 			all_user_db = list(db.query("SELECT * from user,zb where user.zb = zb.id and user.zb <> 0"))
 		else:
 			all_user_db = list(db.query("SELECT user.*, zb.name as zb_name from user,zb where user.zb = zb.id and user.zb=$zb", vars={'zb':zb}))
