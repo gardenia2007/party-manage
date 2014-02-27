@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">CS Party</string>
+    <string name="app_title">计算机学院党建推进系统APP</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     
@@ -11,5 +12,8 @@
     <string name="reload_info">重新加载</string>
     <string name="save">保存更改</string>
     <string name="show_info">显示全部信息</string>
+    <string name="login_name">登录名</string>
+    <string name="login_pw">密码</string>
+    <string name="login_btn">登录</string>
 
 </resources>

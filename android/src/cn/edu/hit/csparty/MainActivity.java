@@ -19,20 +19,31 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private final static int SCANNIN_GREQUEST_CODE = 1;
 	private TextView usernameView; // 用户名字
 	private Button showBtn; // 显示详细信息按钮
 	private String result; // 扫描得到的结果字符串
+	private int zbId; // 所管理支部的ID
+	private String name, zbName; // 用户名，管理支部名称
+	private int user_zb_id = -99; // 扫描到用户支部的ID
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_new);
 
+		Bundle bundle = getIntent().getExtras();
+		zbId = bundle.getInt("zb_id");
+		zbName = bundle.getString("zb_name");
+		name = bundle.getString("name");
+
 		usernameView = (TextView) findViewById(R.id.username);
 		showBtn = (Button) findViewById(R.id.show_info);
+		TextView welcome = (TextView) findViewById(R.id.welcome_msg);
+		welcome.setText(zbName + " " + name);
 
 		// 点击按钮跳转到二维码扫描界面，这里用的是startActivityForResult跳转
 		// 扫描完了之后调到该界面
@@ -63,11 +74,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	// 测试按钮
-	public void testButton(View view) {
-		result = "1100300220";
-		afterScan();
-	}
 
 	/**
 	 * 手动输入编号
@@ -78,7 +84,7 @@ public class MainActivity extends Activity {
 		DialogView = factory.inflate(R.layout.dialog_input_no, null);
 		final EditText edit = (EditText) DialogView
 				.findViewById(R.id.scan_input);
-		edit.setText("1100300220");
+		edit.setText("1110310707");
 		// 创建对话框
 		AlertDialog dlg = new AlertDialog.Builder(MainActivity.this)
 				.setTitle("填写").setView(DialogView)
@@ -107,25 +113,24 @@ public class MainActivity extends Activity {
 	 */
 	private void afterScan() {
 		Network net = new Network();
-		// 从服务器上获取基本信息
-		JSONObject info = net.fetchUserInfo(result);
-		String text = "扫描结果\n编号：" + result;
 		try {
+			// 从服务器上获取基本信息
+			JSONObject info = net.fetchUserInfo(result);
+			String text = "扫描结果\n编号：" + result;
 			Log.v("info", info.toString());
 			Log.v("bool", info.getBoolean("status") + "");
 			String t;
 			if (info.getBoolean("status")) { // 成功
 				t = "\n姓名：" + info.getString("name") + "\n支部："
 						+ info.getString("zb");
+				user_zb_id = info.getInt("zb_id");
 				showBtn.setVisibility(View.VISIBLE);
 			} else {
 				t = "\n无相关信息。";
 				showBtn.setVisibility(View.INVISIBLE);
 			}
-			Log.v("t", t);
-			String a = text + t;
-			Log.v("a", a);
-			usernameView.setText(a);
+			// String a = ;
+			usernameView.setText(text + t);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -133,8 +138,16 @@ public class MainActivity extends Activity {
 
 	/**
 	 * 显示完整的信息列表
+	 * @throws JSONException 
 	 */
-	public void showInfoList(View view) {
+	public void showInfoList(View view) throws JSONException {
+
+		if (zbId != user_zb_id) {
+			Toast.makeText(MainActivity.this,
+					"该党员不属于'" + zbName + "'，您无法查看、修改其信息。", Toast.LENGTH_LONG)
+					.show();
+			return;
+		}
 		// 显示信息
 		Intent intent = new Intent();
 		intent.setClass(MainActivity.this, InfoShowActivity.class);
