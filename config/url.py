@@ -8,6 +8,7 @@ urls = (
     "/test",                    pre_fix + "index.Test",
 
     "/m",                       pre_fix + "mobile.Index",
+    "/m/admin/login",           pre_fix + "mobile.Login",
     "/m/(\w+)/info",            pre_fix + "mobile.InfoAll",
     "/m/(\w+)/info/basic",      pre_fix + "mobile.InfoBasic",
     "/m/(\w+)/info/update",     pre_fix + "mobile.InfoUpdate",

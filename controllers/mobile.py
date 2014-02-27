@@ -41,11 +41,26 @@ class Index:
 	def POST(self):
 		pass
 
+class Login:
+	def GET(self):
+		self.POST()
+	def POST(self):
+		raw_data = web.data()
+		result = {'status':False}
+		try:
+			data = json.loads(raw_data)
+			sql = 'SELECT zb.id as zb_id, zb.name as zb_name from admin, \
+					zb where admin.name=$name and admin.pw=$pw and admin.zb=zb.id'
+			info = db.query(sql, vars={'name':data['name'], 'pw':data['pw']})[0]
+			result = {'status':True, 'zb_id':info.zb_id, 'zb_name':info.zb_name}
+		except Exception, e:
+			print e, 'not found'
+		return json.dumps(result)
 
 class InfoAll:
 	def GET(self, uid):
 		try:
-			user = list(db.select('user', {'xh':uid}, where="xh = $xh"))
+			user = list(db.select('user', {'xh':uid}, where="xh = $xh and zb >= 0"))
 			if len(user) == 0:
 				return
 			data, user = [], user[0]
@@ -71,7 +86,7 @@ class InfoUpdate:
 			sql = 'UPDATE user set '
 			for item in data:
 				sql = sql + " %s = '%s' ,"%(item['field'], item['value'])
-			sql =  sql[:-1] + ' where xh = $xh'
+			sql =  sql[:-1] + ' where xh = $xh and zb >= 0'
 			r = db.query(sql, vars={'xh':uid})
 			print r
 			if r == 0:
@@ -83,13 +98,13 @@ class InfoUpdate:
 
 class InfoBasic:
 	def GET(self, uid):
-		# 以学号作为唯一id
-		user = list(db.query("SELECT user.xm, zb.name from user,zb where user.zb = zb.id and user.xh = $xh",\
-			vars={'xh':uid}))
-		if len(user) == 0:
+		try:
+			# 以学号作为唯一id
+			user = list(db.query("SELECT user.xm, zb.name, zb.id as zb_id from user,zb \
+				where user.zb = zb.id and user.xh = $xh and user.zb >= 0", vars={'xh':uid}))[0]
+			d = {'status':True, 'name':user['xm'], 'zb':user['name'], 'zb_id':user['zb_id']}
+		except Exception, e:
 			d = {'status':False}
-		else:
-			d = {'status':True, 'name':user[0]['xm'], 'zb':user[0]['name']}
 		return json.dumps(d)
 	def POST(self, uid):
 		pass

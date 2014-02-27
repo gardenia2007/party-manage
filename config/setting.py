@@ -13,13 +13,12 @@ config = web.storage(
 	email='gardeniaxy@gmail.com',
 	root = '',
 	refer = '',
-	static = '/static',
+	static = 'http://csparty.qiniudn.com',
 	app_name = 'csparty',
 	# 年级
 	grade = '1',
 )
 
-default_photo_url = '/mentor/static/img/avatar.png'
 
 # web.template.Template.globals['cxt'] = web.ext
 
