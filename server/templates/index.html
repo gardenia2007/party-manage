@@ -1,47 +1,6 @@
-$def with (session, data)
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+$def with (session, route, data)
 
-    <title>$config.site_name</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="$config.static/css/bootstrap.css" rel="stylesheet">
-    <link href="$config.static/css/todc-bootstrap.css" rel="stylesheet">
-    <link href="$config.static/todc-select2/select2.css" rel="stylesheet">
-    <!-- <link href="$config.static/css/login.css" rel="stylesheet"> -->
-
-    <script type="text/javascript" src="$config.static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="$config.static/todc-select2/select2.min.js"></script>
-    <script>
-        $$(document).ready(function() {
-           // $$("#select-zb").select2({allowClear:true});
-           $$("#select-zb").change(function(){
-           	id = $$(this).children('option:selected').val();
-           	l = window.location;
-           	url = l.protocol+'//'+l.host+l.pathname+'?id='+id;
-           	window.location.href = url;
-           });
-        });
-    </script>
-    <style type="text/css">
-    	.info-bg{background-color: #33CCFF}
-    </style>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
+$:render.common.header(session, route)
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="col-md-12">

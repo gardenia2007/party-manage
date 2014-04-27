@@ -21,7 +21,7 @@ app = web.application(urls, globals())
 
 # session
 store = web.session.DBStore(web.config._db, 'sessions')
-session = web.session.Session(app, store, initializer={'is_login':False})
+session = web.session.Session(app, store, initializer={'is_login':False,'power':0})
 web.config._session = session
 
 

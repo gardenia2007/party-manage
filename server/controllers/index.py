@@ -24,7 +24,7 @@ class Index(User):
 			all_user.append(self.get_all_info(user))
 		print all_user
 		data = {"zb":all_zb, "user":all_user, "cur_id":zb}
-		return render.index(self.session, data)
+		return render.index(self.session, '', data)
 	def POST(self):
 		pass
 

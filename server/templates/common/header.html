@@ -66,25 +66,28 @@ $def if_active(ii='teacher_all'):
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
+        <li class="$if_active('flow')"><a href="$config.root/flow">发展流程文档</a></li>
+      $if session.is_login:
         <li class="$if_active('user_add')"><a href="$config.root/admin/user/add">添加党员</a></li>
         <li class="$if_active('user_list')"><a href="$config.root/admin/user/list">党员列表</a></li>
         <li class="$if_active('user_update')"><a href="$config.root/admin/user/list">党员信息更新</a></li>
-      $if session.power == '1':
-        <li class="$if_active('zb_add')"><a href="$config.root/admin/zb/add">添加党支部</a></li>
-        <li class="$if_active('zb_list')"><a href="$config.root/admin/zb/list">党支部列表</a></li>
+        $if session.power == '1':
+          <li class="$if_active('zb_add')"><a href="$config.root/admin/zb/add">添加党支部</a></li>
+          <li class="$if_active('zb_list')"><a href="$config.root/admin/zb/list">党支部列表</a></li>
 
-        <li class="$if_active('zs_add')"><a href="$config.root/admin/zs/add">添加党支书</a></li>
-        <li class="$if_active('zs_list')"><a href="$config.root/admin/zs/list">党支书列表</a></li>
+          <li class="$if_active('zs_add')"><a href="$config.root/admin/zs/add">添加党支书</a></li>
+          <li class="$if_active('zs_list')"><a href="$config.root/admin/zs/list">党支书列表</a></li>
 
-      <li class="$if_active('flow')"><a href="$config.root/flow">发展流程</a></li>
-      <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
+        <li class="$if_active('update_pw')"><a href="$config.root/user/password">密码修改</a></li>
     </ul>
     <p class="navbar-text pull-right">
-      $if session.is_login and session.power == '1':
-        <span></span>
-      $elif session.is_login :
+      $if session.is_login and session.power == 1:
+        <a href="$config.root/admin/logout" class="navbar-link">退出登录</a>
+      $elif session.is_login:
         <span>欢迎$session.name（$session.zb_name）</span>
-      <a href="$config.root/admin/logout" class="navbar-link">退出登录</a>
+        <a href="$config.root/admin/logout" class="navbar-link">退出登录</a>
+      $else:
+        <a href="$config.root/admin/login" class="navbar-link">登录</a>
     </p>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"></a></li>
