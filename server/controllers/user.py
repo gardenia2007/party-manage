@@ -34,4 +34,4 @@ class UpdatePw(User):
 		vars = {'id':self.session.uid}
 		db.update('admin', where=web.db.sqlwhere(vars), pw=i.new_password)
 		return self.success('密码修改成功！')
-		
+

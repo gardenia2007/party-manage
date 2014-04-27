@@ -1,5 +1,5 @@
 
-mv .git /tmp/git_tmp
+# mv .git /tmp/git_tmp
 
 rm *.pyc
 rm *.wsgic
@@ -11,5 +11,5 @@ saecloud deploy
 
 echo "deploy end."
 
-mv /tmp/git_tmp .git
+# mv /tmp/git_tmp .git
 

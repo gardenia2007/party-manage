@@ -57,5 +57,7 @@ urls = (
 
     "/user",                    pre_fix + "user.Index",
     "/user/password",           pre_fix + "user.UpdatePw",
+
+    "/flow",                    pre_fix + "flow.Index",
 )
 

@@ -13,7 +13,8 @@ config = web.storage(
 	email='gardeniaxy@gmail.com',
 	root = '',
 	refer = '',
-	static = 'http://csparty.qiniudn.com',
+	# static = 'http://csparty.qiniudn.com',
+	static = '/static',
 	app_name = 'csparty',
 	# 年级
 	grade = '1',
